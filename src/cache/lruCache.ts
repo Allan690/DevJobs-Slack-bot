@@ -1,10 +1,13 @@
-const LRUCache =  require('lru-cache');
+import LRUCache from 'lru-cache';
 
 const cacheOptions = () => ({
   maxAge: 300000
 });
 
 class LRUCacheSingleton {
+  private static exists: LRUCacheSingleton;
+  private static instance: LRUCacheSingleton;
+  private cache: LRUCache<string, any>;
   constructor() {
     if (LRUCacheSingleton.exists) {
       return LRUCacheSingleton.instance;
@@ -14,7 +17,7 @@ class LRUCacheSingleton {
     LRUCacheSingleton.exists = this;
   }
 
-  getAsync(key) {
+  public getAsync(key: string) {
     return new Promise((resolve, reject) => {
       try {
         const result = this.cache.get(key);
@@ -25,8 +28,8 @@ class LRUCacheSingleton {
     });
   }
 
-  async save(key, field, value) {
-    const currentState = await this.fetch(key);
+  public async save(key: string, field: string, value: any) {
+    const currentState: any = await this.fetch(key);
     if (!currentState) {
       return this.saveObject(key, { [field]: value });
     }
@@ -34,12 +37,12 @@ class LRUCacheSingleton {
     return this.cache.set(key, currentState);
   }
 
-  async fetch(key) {
+  public async fetch(key: string) {
     const result = await this.getAsync(key);
     return result;
   }
 
-  async saveObject(key, value) {
+  public async saveObject(key: string, value: any) {
     const maxCacheAge = 300000;
     return new Promise((resolve, reject) => {
       try {
@@ -51,7 +54,7 @@ class LRUCacheSingleton {
     });
   }
 
-  async delete(key) {
+  public async delete(key: string) {
     return new Promise((resolve, reject) => {
       try {
         this.cache.del(key);
@@ -62,7 +65,7 @@ class LRUCacheSingleton {
     });
   }
 
-  async flush() {
+  public async flush() {
     return new Promise((resolve, reject) => {
       try {
         this.cache.reset();
@@ -73,4 +76,5 @@ class LRUCacheSingleton {
     });
   }
 }
-module.exports = LRUCacheSingleton;
+
+export default LRUCacheSingleton;

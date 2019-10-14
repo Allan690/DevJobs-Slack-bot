@@ -1,7 +1,10 @@
-const redis = require('redis');
-const { promisify } = require('util');
+import redis, { RedisClient } from 'redis'
+import { promisify } from 'util'
 
 class RedisCacheSingleton {
+  private static exists: RedisCacheSingleton;
+  private static instance: RedisCacheSingleton;
+  private client: RedisClient
   constructor() {
     if (RedisCacheSingleton.exists) {
       return RedisCacheSingleton.instance;
@@ -17,7 +20,7 @@ class RedisCacheSingleton {
     RedisCacheSingleton.exists = this;
   }
 
-  async save(key, field, value) {
+  public async save(key: string, field: string, value: any) {
     const currentState = await this.fetch(key);
     if (!currentState) {
       return this.saveObject(key, { [field]: value });
@@ -26,23 +29,23 @@ class RedisCacheSingleton {
     return this.client.setAsync(key, JSON.stringify(currentState));
   }
 
-  async fetch(key) {
+  public async fetch(key: string) {
     const result = await this.client.getAsync(key);
     return result ? JSON.parse(result) : result;
   }
 
-  async saveObject(key, value) {
+  public async saveObject(key: string, value: any) {
     const maxCacheAge = 300000;
     return this.client.setexAsync(key, maxCacheAge, JSON.stringify(value));
   }
 
-  async delete(key) {
+  public async delete(key: string) {
     return this.client.delAsync(key);
   }
 
-  async flush() {
+  public async flush() {
     return this.client.flushallAsync();
   }
 }
 
-module.exports = RedisCacheSingleton;
+export default RedisCacheSingleton;
