@@ -1,5 +1,5 @@
-import { Router } from "express";
-import SlackController from "./SlackController";
+import { Router } from 'express';
+import SlackController from './SlackController';
 
 const slackRouter = Router();
 slackRouter.post(
