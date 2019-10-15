@@ -1,21 +1,13 @@
-/**
-* A simple wrapper for console
-*/
-export const logger = console;
+import debug from 'debug';
+import http from 'http';
+import env from './config/environment';
+import app from './app';
 
-/**
-* Gets the value of an environment variable.
-*
-* @param {string} key - Environment variable key
-* variable exists for the given key
-* @returns {string|number|boolean} The env config value
-*/
-export const env = (key: string) => {
-    const value = process.env[key];
+const logger = debug('log');
+const server = http.createServer(app);
 
-    if (value === 'true') return true;
-    if (value === 'false') return false;
-    if (value === '(empty)') return '';
+server.listen(env.PORT, async () => {
+  app.set('host', `http://localhost:${env.PORT}`);
 
-    return value || null;
-};
+  logger(`Application running on port ${env.PORT}`);
+});
