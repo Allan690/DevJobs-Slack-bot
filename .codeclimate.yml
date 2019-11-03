@@ -1,0 +1,5 @@
+exclude_patterns:
+  - '**/models/*'
+  - '**/*.spec.js'
+  - '**/__mocks__/'
+  
