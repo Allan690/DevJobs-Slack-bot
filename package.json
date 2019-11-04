@@ -9,7 +9,7 @@
     "prebuild": "yarn clean",
     "build": "tsc -b tsconfig.build.json",
     "jest": "ts-node-dev ./node_modules/jest/bin/jest.js",
-    "test": "yarn jest --coverage",
+    "test": "yarn jest --no-cache  --detectOpenHandles --runInBand --forceExit",
     "start:dev": "NODE_ENV=development DEBUG=log nodemon",
     "start:prod": "yarn build && DEBUG=log node dist/index.js",
     "lint": "tslint -c tslint.json -p tsconfig.json",
