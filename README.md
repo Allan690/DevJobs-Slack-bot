@@ -1,8 +1,4 @@
-[![Maintainability](https://api.codeclimate.com/v1/badges/39d075b3b3ce19ead297/maintainability)](https://codeclimate.com/github/Allan690/DevJobs-Slack-bot/maintainability)
-
-[![Test Coverage](https://api.codeclimate.com/v1/badges/39d075b3b3ce19ead297/test_coverage)](https://codeclimate.com/github/Allan690/DevJobs-Slack-bot/test_coverage)
-
-[![CircleCI](https://circleci.com/gh/Allan690/DevJobs-Slack-bot.svg?style=svg)](https://circleci.com/gh/Allan690/DevJobs-Slack-bot)
+[![Maintainability](https://api.codeclimate.com/v1/badges/39d075b3b3ce19ead297/maintainability)](https://codeclimate.com/github/Allan690/DevJobs-Slack-bot/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/39d075b3b3ce19ead297/test_coverage)](https://codeclimate.com/github/Allan690/DevJobs-Slack-bot/test_coverage) [![CircleCI](https://circleci.com/gh/Allan690/DevJobs-Slack-bot.svg?style=svg)](https://circleci.com/gh/Allan690/DevJobs-Slack-bot)
 
 ## DevJobs Bot
 A slack bot for devs looking for jobs. 
