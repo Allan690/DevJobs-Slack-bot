@@ -8,11 +8,11 @@ jobs: # a collection of steps
       - image: circleci/node:12.6.0 # ...with this image as the primary container; this is where all `steps` will run
     steps: # a collection of executable commands
       - checkout # special step to check out source code to working directory
-      - run:
-            name: codeclimate-test-reporter
-            command: |
-              curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-              chmod +x ./cc-test-reporter
+      # - run:
+      #       name: codeclimate-test-reporter
+      #       command: |
+      #         curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+      #         chmod +x ./cc-test-reporter
       - run:
           name: update-npm
           command: 'sudo npm install -g npm@latest && sudo npm install yarn -g'
@@ -26,12 +26,18 @@ jobs: # a collection of steps
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - ./node_modules
-      - run:
-          name: Run Test and Coverage
-          command: |
-            ./cc-test-reporter before-build
-            yarn test -- --coverage -u
-            ./cc-test-reporter after-build -t lcov -d --exit-code $?
+      - add_ssh_keys:
+          fingerprints:
+            - "66:b6:87:82:eb:6c:05:04:70:97:6c:47:25:97:bb:ca"
+      # - run:
+      #     name: fix host authenticity for production server
+      #     command: ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts      
+      # # - run:
+      #     name: Run Test and Coverage
+      #     command: |
+      #       ./cc-test-reporter before-build
+      #       yarn test -- --coverage -u
+      #       /cc-test-reporter after-build --exit-code $?
       - deploy:
             name: digital-ocean
-            command: ssh -o "StrictHostKeyChecking no" root@167.71.253.191 "cd ~/DevJobs-Slack-bot; git pull; yarn install; forever start -c "yarn start:prod" ./"
+            command: ssh -o "StrictHostKeyChecking no" root@167.71.253.191 "cd ~/DevJobs-Slack-bot && git add . && git stash && git fetch && git checkout master && git branch -D develop && git checkout develop && sh post_deployment.sh"
