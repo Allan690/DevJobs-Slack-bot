@@ -11,7 +11,7 @@ const isVerified = (req: Request) => {
 
     // Check if the timestamp is too old
   const fiveMinutesAgo = ~~(Date.now() / 1000) - (60 * 5);
-  if (parseInt(timestamp as string) < fiveMinutesAgo) return false;
+  if (parseInt(timestamp as string, 10) < fiveMinutesAgo) return false;
 
   hmac.update(`${version}:${timestamp}:${req.rawBody}`);
 
