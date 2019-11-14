@@ -1,0 +1,82 @@
+html,
+body {
+  display: flex;
+  margin: 0;
+  justify-content: center;
+  /* align-items: center; */
+  width: 100%;
+  height: 100%;
+}
+
+h1 {
+  font-weight: bold;
+  font-size: 50px;
+  line-height: 59px;
+}
+
+p {
+  font-weight: 50;
+  font-size: 30px;
+  line-height: 35px;
+}
+
+.fonts {
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  color: #525252;
+  font-style: normal;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+}
+
+.center {
+  margin: 0 auto;
+}
+
+.contain {
+  max-width: 670px;
+  justify-content: center;
+  overflow-y: scroll;
+}
+
+.contain-pp {
+  width: 90%;
+  max-width: 900px;
+}
+
+.paragraphs,
+.list {
+  font-family: 'Roboto', sans-serif;
+  text-align: left;
+  color: #000000;
+  font-style: normal;
+  font-size: 18px;
+  line-height: 30px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.heading {
+  width: 100%;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  color: #141414;
+}
+
+.heading--left {
+  text-align: left;
+}
+
+.logo {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+}
+
+.install-btn {
+  width: fit-content;
+  margin: 0 auto;
+}
