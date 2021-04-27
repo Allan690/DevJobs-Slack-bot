@@ -43,7 +43,7 @@
     "mongoose": "^5.7.10",
     "morgan": "^1.9.1",
     "qs": "^6.9.1",
-    "redis": "^2.8.0",
+    "redis": "^3.1.1",
     "tsscmp": "^1.0.6"
   },
   "devDependencies": {
